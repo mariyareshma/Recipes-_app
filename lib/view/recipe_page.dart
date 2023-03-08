@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/model/recipes.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class RecipePage extends StatefulWidget {
+  const RecipePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  HomePageState createState() => HomePageState();
+  RecipePageState createState() => RecipePageState();
 }
 
-class HomePageState extends State<HomePage> {
+class RecipePageState extends State<RecipePage> {
+  RandomRecipe? recipe;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +39,9 @@ class HomePageState extends State<HomePage> {
               label: const Text('search')),
         ),
       ],
-      body: Container(),
+      body: Column(
+        children: [Text(recipe!.description!)],
+      ),
     );
   }
 }
