@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/view/home_page.dart';
 
 class FoodApp extends StatelessWidget {
   const FoodApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+        title: 'Recipes App',
+        theme: ThemeData(primarySwatch: Colors.green),
+        home: const HomePage());
   }
 }
