@@ -13,18 +13,27 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Recipe App')),
       persistentFooterButtons: [
-        TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.food_bank),
-            label: const Text('Recipe')),
-        TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.bookmark),
-            label: const Text('Favorite Page')),
-        TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-            label: const Text('search')),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.food_bank),
+              label: const Text('Recipe')),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.bookmark),
+              label: const Text('Favorite Page')),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.search),
+              label: const Text('search')),
+        ),
       ],
       body: Container(),
     );

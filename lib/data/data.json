@@ -1,0 +1,221 @@
+{
+    "id": "0f77983f-db52-404e-bf53-a71debf5fba2",
+    "name": "Low Carb Sheet Tray Italian Sausage And Peppers",
+    "tags": [
+      "meal-plan-ok",
+      "kid-friendly",
+      "paleo",
+      "dairy-free",
+      "gluten-free",
+      "wheat-free",
+      "egg-free",
+      "peanut-free",
+      "tree-nut-free",
+      "soy-free",
+      "fish-free",
+      "shellfish-free",
+      "beef-free",
+      "chicken-free",
+      "lchf",
+      "relevant-meal--main-dishes"
+    ],
+    "description": "Sheet tray meals are super quick and easy, but the key to a successful sheet tray dinner is to make sure all the veggies and meat will cook at the same rate.  This means altering the size and shapes of the veggies and meat.  I like to cut the sausages into thirds and the peppers and zucchini into larger pieces to facilitate cooking.",
+    "prepareTime": 10,
+    "cookTime": 40,
+    "ingredients": [
+      {
+        "name": "Sausage Italian Pork Raw",
+        "servingSize": {
+          "units": "link, 4/lb",
+          "desc": "5 link, 4/lb",
+          "qty": 5.0,
+          "grams": 565.0,
+          "scale": 5.0
+        }
+      },
+      {
+        "name": "Zucchini, Raw",
+        "servingSize": {
+          "units": "medium",
+          "desc": "1 medium",
+          "qty": 1.0,
+          "grams": 196.0,
+          "scale": 1.735
+        }
+      },
+      {
+        "name": "Yellow Squash",
+        "servingSize": {
+          "units": "medium",
+          "desc": "½ medium",
+          "qty": 0.5,
+          "grams": 171.0,
+          "scale": 0.95
+        }
+      },
+      {
+        "name": "Green Bell Pepper",
+        "servingSize": {
+          "units": "large - 3\" diameter x 3 3/4\"",
+          "desc": "½ large - 3\" diameter x 3 3/4\"",
+          "qty": 0.5,
+          "grams": 82.0,
+          "scale": 0.55
+        }
+      },
+      {
+        "name": "Red Bell Peppers, Raw",
+        "servingSize": {
+          "units": "large - 3\" diameter x 3 3/4\"",
+          "desc": "½ large - 3\" diameter x 3 3/4\"",
+          "qty": 0.5,
+          "grams": 82.0,
+          "scale": 0.55
+        }
+      },
+      {
+        "name": "Mushrooms, Raw",
+        "servingSize": {
+          "units": "ounce",
+          "desc": "4 ounce",
+          "qty": 4.0,
+          "grams": 113.398,
+          "scale": 1.62
+        }
+      },
+      {
+        "name": "Avocado Oil",
+        "servingSize": {
+          "units": "tablespoon",
+          "desc": "3 tablespoon",
+          "qty": 3.0,
+          "grams": 40.875,
+          "scale": 3.0
+        }
+      },
+      {
+        "name": "Salt, Sea Salt",
+        "servingSize": {
+          "units": "teaspoon",
+          "desc": "1-¼ teaspoon",
+          "qty": 1.25,
+          "grams": 7.5,
+          "scale": 1.25
+        }
+      },
+      {
+        "name": "Black Pepper",
+        "servingSize": {
+          "units": "teaspoon",
+          "desc": "½ teaspoon",
+          "qty": 0.5,
+          "grams": 1.15,
+          "scale": 0.5
+        }
+      },
+      {
+        "name": "Basil",
+        "servingSize": {
+          "units": "tablespoon, chopped",
+          "desc": "2 tablespoon, chopped",
+          "qty": 2.0,
+          "grams": 5.3,
+          "scale": 2.0
+        }
+      },
+      {
+        "name": "Thyme, Fresh",
+        "servingSize": {
+          "units": "tablespoon, chopped",
+          "desc": "1 tablespoon, chopped",
+          "qty": 1.0,
+          "grams": 2.4,
+          "scale": 1.0
+        }
+      },
+      {
+        "name": "Rosemary, Fresh",
+        "servingSize": {
+          "units": "tablespoon",
+          "desc": "1 tablespoon",
+          "qty": 1.0,
+          "grams": 1.7,
+          "scale": 1.0
+        }
+      }
+    ],
+    "steps": [
+      "Preheat an oven to 425 F.  Cut zucchini and yellow squash in half the long way.  Then into half moons about 1” thick.  Next cut the bell peppers into 1 ½” squares and slice the mushrooms into ⅓” thick slices.",
+      "Cut the sausages on a bias into thirds.  Then toss all the veggies, sausages, oil and seasonings together in a large bowl.",
+      "Bake for 35-40 minutes until the veggies are browned and the sausage is browned and cooked through.."
+    ],
+    "servings": 4,
+    "servingSizes": [
+      {
+        "scale": 1.0,
+        "qty": 1.0,
+        "grams": 226.8,
+        "units": "servings"
+      }
+    ],
+    "nutrients": {
+      "caloriesKCal": 614.822,
+      "caloriesKJ": 2572.41,
+      "totalCarbs": 7.853,
+      "diabetesCarbsADA": 7.853,
+      "netCarbs": 5.188,
+      "diabetesCarbs": 5.326,
+      "fiber": 2.387,
+      "starch": 0.465,
+      "sugar": 4.26,
+      "addedSugar": 0.0,
+      "sugarAlcohols": 0.278,
+      "protein": 22.483,
+      "fat": 55.01,
+      "transFat": 0.0,
+      "monousatFat": 27.493,
+      "polyunsatFat": 7.258,
+      "omega3Fat": 0.17,
+      "omega6Fat": 1.395,
+      "saturatedFat": 17.22,
+      "cholesterol": 107.35,
+      "vitaminA": 50.987,
+      "vitaminC": 58.49,
+      "vitaminD": 0.05,
+      "vitaminE": 1.79,
+      "vitaminK": 21.367,
+      "vitaminB1": 0.89,
+      "vitaminB2": 0.44,
+      "vitaminB3": 6.38,
+      "vitaminB5": 0.68,
+      "vitaminB6": 0.675,
+      "vitaminB12": 1.297,
+      "potassium": 750.847,
+      "magnesium": 48.775,
+      "calcium": 58.208,
+      "iron": 2.507,
+      "zinc": 3.107,
+      "copper": 0.302,
+      "phosphorus": 271.792,
+      "sodium": 1770.7,
+      "selenium": 37.908,
+      "folate": 49.593,
+      "choline": 15.53,
+      "alcohol": 0.0,
+      "caffeine": 0.0,
+      "gluten": 0.0,
+      "manganese": 0.305,
+      "conjugatedLinoleicAcid": 0.0,
+      "phyticAcid": 34.095,
+      "xylitol": 0.0,
+      "isomalt": 0.0,
+      "sorbitol": 0.0,
+      "maltitol": 0.0,
+      "lactitol": 0.0,
+      "erythritol": 0.0,
+      "pinitol": 0.0,
+      "inositol": 0.058,
+      "mannitol": 0.22
+    },
+    "image": "https://tinyurl.com/2p82zzca/0f77983f-db52-404e-bf53-a71debf5fba2.png"
+  }
