@@ -28,9 +28,9 @@ Future<List<RandomRecipe>> getFavorite() async {
   var fileObj = File(fullFilePath);
   if (fileObj.existsSync()) {
     var jsonString = fileObj.readAsStringSync();
-    var objRecipe = jsonDecode(jsonString) as List;
+    var foodObj = jsonDecode(jsonString) as List;
 
-    return objRecipe.map((e) {
+    return foodObj.map((e) {
       return RandomRecipe.fromJson(e);
     }).toList();
   }
