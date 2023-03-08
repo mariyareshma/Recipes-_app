@@ -10,6 +10,11 @@ class SearchPage extends StatefulWidget {
 class SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(),
+      body: const TextField(
+          decoration: InputDecoration(
+              icon: Icon(Icons.search), labelText: 'Search the Recipe')),
+    );
   }
 }
