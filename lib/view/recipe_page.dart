@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/model/recipes.dart';
 import 'package:food_app/services/service.dart';
-import 'package:food_app/view/favorite_Page.dart';
-import 'package:food_app/view/recipe_widget.dart';
+import 'package:food_app/view/favorite_page.dart';
 import 'package:food_app/view/search_page.dart';
 
 class RecipePage extends StatefulWidget {
@@ -15,7 +14,8 @@ class RecipePage extends StatefulWidget {
 }
 
 class RecipePageState extends State<RecipePage> {
-  RandomRecipe? recipe;
+  RandomRecipe? recipes;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,15 +43,11 @@ class RecipePageState extends State<RecipePage> {
     );
   }
 
-  Widget getBody() {
-    return getRecipesFuture();
-  }
-
-  Widget getRecipesFuture() {
+  Widget getRandomFuture() {
     return FutureBuilder(
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return getListView(snapshot.data);
+          return getListView();
         } else {
           return const Center(child: CircularProgressIndicator());
         }
@@ -60,31 +56,25 @@ class RecipePageState extends State<RecipePage> {
     );
   }
 
-  Widget getListView(List<RandomRecipe>? data) {
-    if (data == null || data.isEmpty) {
-      return const Center(
-        child: Text('Error in getting data'),
-      );
-    }
+  Widget getBody() {
+    return getRandomFuture();
+  }
 
-    var recipesWidgets = <Widget>[];
-    for (var recipes in data) {
-      var recipesWidget = Column(
-        children: [
-          Text(recipes.id.toString()),
-          Text(recipes.name!),
-          Text(recipes.description!),
-          Image.network(
-            recipes.image!,
-            width: 200,
-            height: 200,
-          )
-        ],
-      );
+  Widget getListView() {
+    return Row(
+      children: [
+        IconButton(
+            onPressed: () {
+              // if(){
 
-      recipesWidgets.add(recipesWidget);
-    }
-
-    return ListView(children: recipesWidgets);
+              // }
+            },
+            icon: const Icon(Icons.heart_broken)),
+        Image.network(recipes!.image.toString()),
+        Column(
+          children: [Text(recipes!.name!), Text(recipes!.description!)],
+        )
+      ],
+    );
   }
 }
