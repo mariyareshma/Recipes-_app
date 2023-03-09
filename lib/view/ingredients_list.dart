@@ -22,7 +22,7 @@ class IngredientsWidget extends StatelessWidget {
 
     return Text(
       result,
-      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
     );
   }
 }

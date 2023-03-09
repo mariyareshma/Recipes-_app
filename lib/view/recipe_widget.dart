@@ -10,27 +10,121 @@ class RecipeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.network(recipe!.image.toString()),
-        Text(recipe!.name!),
-        Text(recipe!.id.toString()),
-        Text(recipe!.description!),
-        Text(recipe!.cookTime.toString()),
-        Text(recipe!.prepareTime.toString()),
-        Text(recipe!.servings.toString()),
-        getResult()
-      ],
+    return Card(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.network(
+                      recipe!.image!.toString(),
+                      width: 250,
+                      height: 250,
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.heart_broken,
+                        size: 40,
+                        color: Colors.green,
+                      )),
+                ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    recipe!.name!,
+                    style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Description:${recipe!.description!}',
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.normal),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: Text('Cooking Time:${recipe!.cookTime.toString()}',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.normal)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: Text(
+                    'PrePare Time:${recipe!.prepareTime.toString()}',
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.normal),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: Text('Servings Size:${recipe!.servings.toString()}',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.normal)),
+                ),
+                getResult(),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget getResult() {
     var widget = <Widget>[];
-    widget.add(IngredientsWidget(ingredients: recipe!.ingredients));
-    widget.add(ServingSizeWidget(servingSize: recipe!.servingSizes));
-    widget.add(TagsWidget(tags: recipe!.tags));
-    widget.add(TagsWidget(tags: recipe!.steps));
+    widget.add(Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: IngredientsWidget(ingredients: recipe!.ingredients),
+    ));
+    widget.add(Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ServingSizeWidget(servingSize: recipe!.servingSizes),
+    ));
+    widget.add(Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TagsWidget(tags: recipe!.tags),
+    ));
+    widget.add(Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TagsWidget(tags: recipe!.steps),
+    ));
 
     return Column(children: widget);
   }
+
+//   List<Widget> getIngredients() {
+//     return recipe!.ingredients
+//         .map((e) => IngredientsWidget(ingredients: e))
+//         .toList();
+//   }
+
+//   List<Widget> getServingSize() {
+//     return recipe!.servingSizes
+//         .map((e) => ServingSizeWidget(servingSize: e))
+//         .toList();
+//   }
+//   String getNeturtion(){
+//     return recipe!.nutrients.map((key, value) => NutrientsWidget(nutrients: key)).toString();
+//   }
+// }
 }

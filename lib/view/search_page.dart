@@ -16,7 +16,7 @@ class SearchPage extends StatefulWidget {
 class SearchPageState extends State<SearchPage> {
   RandomRecipe? result;
   var isLoading = false;
-  String? selectedRecipe;
+
   TextEditingController recipeController = TextEditingController();
 
   @override
@@ -72,24 +72,19 @@ class SearchPageState extends State<SearchPage> {
     return getListView(result);
   }
 
-  Widget getListView(recipe) {
-    if (recipe == null || recipe.isEmpty) {
+  Widget getListView(RandomRecipe? data) {
+    if (data == null) {
       return const Center(
         child: Text('Error in getting data'),
       );
     }
 
-    var recipesWidgets = <Widget>[];
-    for (var recipes in recipe) {
-      var recipesWidget = Row(children: [
-        RecipeWidget(
-          recipe: recipes,
-        )
-      ]);
+    var recipeWidget = SingleChildScrollView(
+      child: RecipeWidget(
+        recipe: data,
+      ),
+    );
 
-      recipesWidgets.add(recipesWidget);
-    }
-
-    return ListView(children: recipesWidgets);
+    return recipeWidget;
   }
 }
