@@ -5,7 +5,7 @@ import 'package:food_app/view/recipe_widget.dart';
 import '../services/search_recipe.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({
+  SearchPage({
     Key? key,
   }) : super(key: key);
 
@@ -14,7 +14,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class SearchPageState extends State<SearchPage> {
-  RandomRecipe? result;
+  late List<RandomRecipe?> recipes;
   var isLoading = false;
 
   TextEditingController recipeController = TextEditingController();
@@ -34,7 +34,7 @@ class SearchPageState extends State<SearchPage> {
                     var finalResult =
                         await getRecipeSearchResult(recipeController.text);
                     setState(() {
-                      result = finalResult;
+                      recipes = finalResult;
                     });
                   } catch (err) {
                     debugPrint(err.toString());
@@ -66,13 +66,13 @@ class SearchPageState extends State<SearchPage> {
         child: CircularProgressIndicator(),
       );
     }
-    if (result == null) {
+    if (recipes == null) {
       return Container();
     }
-    return getListView(result);
+    return getListView(recipes);
   }
 
-  Widget getListView(RandomRecipe? data) {
+  Widget getListView(List<RandomRecipe?> data) {
     if (data == null) {
       return const Center(
         child: Text('Error in getting data'),
