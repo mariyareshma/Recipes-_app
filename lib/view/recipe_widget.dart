@@ -28,13 +28,6 @@ class RecipeWidget extends StatelessWidget {
                       height: 250,
                     ),
                   ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.heart_broken,
-                        size: 40,
-                        color: Colors.green,
-                      )),
                 ]),
           ),
           Padding(

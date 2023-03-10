@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/model/recipes.dart';
-import 'package:food_app/view/recipe_widget.dart';
-
-import '../services/search_recipe.dart';
+import 'package:food_app/model/search_recipes.dart';
+import 'package:food_app/services/search_recipe.dart';
+import 'package:food_app/view/preview_widget.dart';
 
 class SearchPage extends StatefulWidget {
-  SearchPage({
-    Key? key,
-  }) : super(key: key);
+  const SearchPage({Key? key, this.recipe}) : super(key: key);
+  final RandomRecipe? recipe;
 
   @override
   SearchPageState createState() => SearchPageState();
 }
 
 class SearchPageState extends State<SearchPage> {
-  late List<RandomRecipe?> recipes;
+  List<RandomRecipes>? recipes;
   var isLoading = false;
 
   TextEditingController recipeController = TextEditingController();
@@ -23,30 +22,8 @@ class SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          actions: [
-            IconButton(
-                onPressed: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-
-                  try {
-                    var finalResult =
-                        await getRecipeSearchResult(recipeController.text);
-                    setState(() {
-                      recipes = finalResult;
-                    });
-                  } catch (err) {
-                    debugPrint(err.toString());
-                  } finally {
-                    setState(() {
-                      isLoading = false;
-                    });
-                  }
-                },
-                icon: const Icon(Icons.arrow_right_alt))
-          ],
-          title: TextField(
+        actions: [
+          TextField(
             keyboardType: TextInputType.text,
             controller: recipeController,
             decoration: const InputDecoration(
@@ -55,36 +32,75 @@ class SearchPageState extends State<SearchPage> {
                   color: Colors.white,
                 ),
                 hintText: 'Search'),
-          )),
+            onSubmitted: (value) {
+              setState(() {
+                isLoading = true;
+              });
+              try {
+                //Api call
+                var recipe = SearchResult();
+                recipe.name;
+
+                var recipeResult = getRecipeSearchResult(recipe);
+                recipe = recipeResult as SearchResult;
+              } catch (err) {
+                debugPrint(err.toString());
+              } finally {
+                setState(() {
+                  isLoading = false;
+                });
+              }
+            },
+          ),
+        ],
+      ),
       body: getBody(),
     );
   }
 
   Widget getBody() {
-    if (isLoading == true) {
+    if (isLoading = true) {
       return const Center(
         child: CircularProgressIndicator(),
       );
     }
     if (recipes == null) {
-      return Container();
-    }
-    return getListView(recipes);
-  }
-
-  Widget getListView(List<RandomRecipe?> data) {
-    if (data == null) {
-      return const Center(
-        child: Text('Error in getting data'),
-      );
+      return const Text('Please search something else');
     }
 
-    var recipeWidget = SingleChildScrollView(
-      child: RecipeWidget(
-        recipe: data,
+    List<Widget> getRecipeView(List<RandomRecipe?> recipes) {
+      return recipes
+          .map((e) => GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => PreviewWidget(
+                              recipe: e,
+                            ))));
+              },
+              child: PreviewWidget(
+                recipe: e,
+              )))
+          .toList();
+    }
+
+    return Card(
+      child: Row(
+        children: [
+          Center(
+            child: Text(widget.recipe!.name!),
+          ),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.favorite)),
+          Center(child: Image.network(widget.recipe!.image.toString())),
+          Column(
+            children: [
+              Text(widget.recipe!.description!),
+              Text(widget.recipe!.cookTime.toString())
+            ],
+          ),
+        ],
       ),
     );
-
-    return recipeWidget;
   }
 }
