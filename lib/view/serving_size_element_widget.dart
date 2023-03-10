@@ -11,7 +11,7 @@ class ServingSizeWidget extends StatelessWidget {
     if (servingSize.isEmpty) {
       return Container();
     }
-    var result = 'Ingredients: ';
+    var result = 'ServingSizeElement: ';
 
     for (var serving in servingSize) {
       result = '$result$serving, ';
@@ -22,7 +22,7 @@ class ServingSizeWidget extends StatelessWidget {
 
     return Text(
       result,
-      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
     );
   }
 }

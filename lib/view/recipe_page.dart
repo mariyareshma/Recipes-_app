@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/model/recipes.dart';
 import 'package:food_app/services/service.dart';
 import 'package:food_app/view/favorite_page.dart';
+import 'package:food_app/view/recipe_widget.dart';
 import 'package:food_app/view/search_page.dart';
 
 class RecipePage extends StatefulWidget {
@@ -14,40 +15,53 @@ class RecipePage extends StatefulWidget {
 }
 
 class RecipePageState extends State<RecipePage> {
-  RandomRecipe? recipes;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Recipe App')),
-      persistentFooterButtons: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.food_bank_sharp)),
-        IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FavoritePage()),
-              );
-            },
-            icon: const Icon(Icons.heart_broken)),
-        IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SearchPage()),
-              );
-            },
-            icon: const Icon(Icons.search))
-      ],
-      body: getBody(),
-    );
+        appBar: AppBar(title: const Text('Recipe App')),
+        persistentFooterButtons: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.food_bank_sharp,
+                  size: 40,
+                  color: Colors.green,
+                )),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FavoritePage()),
+                  );
+                },
+                icon: const Icon(
+                  Icons.heart_broken,
+                  size: 40,
+                  color: Colors.green,
+                )),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SearchPage()),
+                  );
+                },
+                icon: const Icon(
+                  Icons.search,
+                  size: 40,
+                  color: Colors.green,
+                ))
+          ])
+        ],
+        body: getRecipeFuture());
   }
 
-  Widget getRandomFuture() {
+  Widget getRecipeFuture() {
     return FutureBuilder(
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return getListView();
+          return getListView(snapshot.data);
         } else {
           return const Center(child: CircularProgressIndicator());
         }
@@ -56,25 +70,19 @@ class RecipePageState extends State<RecipePage> {
     );
   }
 
-  Widget getBody() {
-    return getRandomFuture();
-  }
+  Widget getListView(RandomRecipe? data) {
+    if (data == null) {
+      return const Center(
+        child: Text('Error in getting data'),
+      );
+    }
 
-  Widget getListView() {
-    return Row(
-      children: [
-        IconButton(
-            onPressed: () {
-              // if(){
-
-              // }
-            },
-            icon: const Icon(Icons.heart_broken)),
-        Image.network(recipes!.image.toString()),
-        Column(
-          children: [Text(recipes!.name!), Text(recipes!.description!)],
-        )
-      ],
+    var recipeWidget = SingleChildScrollView(
+      child: RecipeWidget(
+        recipe: data,
+      ),
     );
+
+    return recipeWidget;
   }
 }
