@@ -87,6 +87,10 @@ class Ingredient {
           : IngredientServingSize.fromJson(json["servingSize"]),
     );
   }
+  Map<String, dynamic> toJson() {
+    var ingredient = {'name': name, 'servingSize': servingSize};
+    return ingredient;
+  }
 }
 
 class IngredientServingSize {
@@ -112,6 +116,17 @@ class IngredientServingSize {
       grams: int.tryParse(json["grams"].toString()),
       scale: json["scale"],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    var ingredientServingSize = {
+      'unit': units,
+      'desc': desc,
+      'qty': qty,
+      'grams': grams,
+      'scale': scale
+    };
+    return ingredientServingSize;
   }
 }
 
@@ -141,5 +156,16 @@ class ServingSizeElement {
       originalWeight: int.tryParse(json["originalWeight"].toString()),
       originalWeightUnits: json["originalWeightUnits"],
     );
+  }
+  Map<String, dynamic> toJson() {
+    var servingSizeElement = {
+      'scale': scale,
+      'qty': qty,
+      'grams': grams,
+      'unit': units,
+      'originalWeight': originalWeight,
+      'originalUnits': originalWeightUnits,
+    };
+    return servingSizeElement;
   }
 }

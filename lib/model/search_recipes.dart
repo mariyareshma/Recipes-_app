@@ -1,4 +1,4 @@
-class SearchResult {
+class SearchQuery {
   String? name;
   List<String>? tags;
   List<String>? includeIngredients;

@@ -5,7 +5,7 @@ var dio = Dio();
 Future<RandomRecipe?> getRandomRecipe() async {
   var response = await dio.get('https://low-carb-recipes.p.rapidapi.com/random',
       options: Options(headers: {
-        'X-RapidAPI-Key': '0a3549b220msh24b0e7a78c5e8a4p11c08ajsn185dfb2e808e',
+        'X-RapidAPI-Key': 'ad9b6066b1mshd5756570e550bb8p160398jsndfd6aec09495',
         'X-RapidAPI-Host': 'low-carb-recipes.p.rapidapi.com'
       }));
   if (response.statusCode == 200) {

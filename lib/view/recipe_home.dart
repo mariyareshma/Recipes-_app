@@ -11,26 +11,21 @@ class RecipeHome extends StatefulWidget {
 }
 
 class _RecipeHomeState extends State<RecipeHome> {
-  var selectedIndex = 0;
+  var selectedIndex = 2;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Home Page')),
+        appBar: AppBar(title: const Text('Recipe Book')),
         bottomNavigationBar: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.food_bank),
                 label: 'Recipe Page',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
-                label: 'Favorite Page',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Search',
-              ),
+                  icon: Icon(Icons.favorite), label: 'Favorite Page'),
+              BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search')
             ],
             currentIndex: selectedIndex,
             unselectedItemColor: Colors.green,
@@ -44,12 +39,12 @@ class _RecipeHomeState extends State<RecipeHome> {
   Widget getSelected() {
     switch (selectedIndex) {
       case 0:
-        return const RecipePage();
+        return const RandomRecipePage();
       case 1:
-        return FavoritePage();
+        return const FavoritePage();
       case 2:
         return const SearchPage();
     }
-    return const RecipeHome();
+    return const RandomRecipePage();
   }
 }

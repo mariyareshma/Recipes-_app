@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:food_app/model/recipes.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -31,7 +30,7 @@ Future<List<RandomRecipe>> getFavorite() async {
     var foodObj = jsonDecode(jsonString);
 
     return foodObj.map((e) {
-      return RandomRecipe.fromJson(e);
+      return RandomRecipes.fromJson(e);
     }).toList();
   }
   return <RandomRecipe>[];

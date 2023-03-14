@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:food_app/model/recipes.dart';
-
 import '../model/search_recipes.dart';
 
 var dio = Dio();
 Future<List<RandomRecipe>> getRecipeSearchResult(
-    SearchResult searchResult) async {
+    SearchQuery searchResult) async {
   var randomRecipes = <RandomRecipe>[];
   var response = await dio.get('https://low-carb-recipes.p.rapidapi.com/search',
       queryParameters: {'name': searchResult},

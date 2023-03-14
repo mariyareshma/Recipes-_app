@@ -1,60 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/model/recipes.dart';
 import 'package:food_app/services/service.dart';
-import 'package:food_app/view/favorite_page.dart';
-import 'package:food_app/view/recipe_widget.dart';
-import 'package:food_app/view/search_page.dart';
+import 'package:food_app/view/recipe_widget/recipe_widget.dart';
 
-class RecipePage extends StatefulWidget {
-  const RecipePage({
+class RandomRecipePage extends StatefulWidget {
+  const RandomRecipePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  RecipePageState createState() => RecipePageState();
+  RandomRecipePageState createState() => RandomRecipePageState();
 }
 
-class RecipePageState extends State<RecipePage> {
+class RandomRecipePageState extends State<RandomRecipePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: const Text('Recipe App')),
-        persistentFooterButtons: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.food_bank_sharp,
-                  size: 40,
-                  color: Colors.green,
-                )),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => FavoritePage()),
-                  );
-                },
-                icon: const Icon(
-                  Icons.heart_broken,
-                  size: 40,
-                  color: Colors.green,
-                )),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SearchPage()),
-                  );
-                },
-                icon: const Icon(
-                  Icons.search,
-                  size: 40,
-                  color: Colors.green,
-                ))
-          ])
-        ],
-        body: getRecipeFuture());
+    return getRecipeFuture();
   }
 
   Widget getRecipeFuture() {

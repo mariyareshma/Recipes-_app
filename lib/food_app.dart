@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/view/recipe_page.dart';
+import 'package:food_app/view/recipe_home.dart';
 
 class FoodApp extends StatelessWidget {
   const FoodApp({Key? key}) : super(key: key);
@@ -9,6 +9,6 @@ class FoodApp extends StatelessWidget {
     return MaterialApp(
         title: 'Recipes App',
         theme: ThemeData(primarySwatch: Colors.green),
-        home: const RecipePage());
+        home: const RecipeHome());
   }
 }
