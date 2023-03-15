@@ -9,34 +9,26 @@ class TagsWidget extends StatelessWidget {
     if (tags.isEmpty) {
       return Container();
     }
-    var result = ' ';
 
-    for (var tag in tags) {
-      result = '$result$tag, ';
-    }
-    if (tags.isNotEmpty) {
-      result = result.substring(0, result.length - 2);
-    }
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('Tags :',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        ),
+        for (var tag in tags)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Tag :',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              '*  $tag',
+              style:
+                  const TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
             ),
-          ),
-          Text(
-            result,
-            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
-          ),
-        ],
-      ),
+          )
+      ],
     );
   }
 }

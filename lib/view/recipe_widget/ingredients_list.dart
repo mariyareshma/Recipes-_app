@@ -17,7 +17,7 @@ class IngredientWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                ' * ${ingredient!.name!}',
+                ingredient!.name!,
                 style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.normal,
