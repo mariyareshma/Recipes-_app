@@ -1,5 +1,10 @@
-class SearchResult {
-  String? searchResult;
+class SearchQuery {
+  String? name;
+  List<String>? tags;
+  List<String>? includeIngredients;
+  List<String>? excludeIngredients;
 
-  SearchResult(this.searchResult);
+  Map<String, dynamic> getSearchRecipe() {
+    return {'name': name};
+  }
 }

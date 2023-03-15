@@ -1,63 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/model/recipes.dart';
-import 'package:food_app/view/recipe_widget.dart';
-
-import '../services/search_recipe.dart';
+import 'package:food_app/model/search_recipes.dart';
+import 'package:food_app/services/search_recipe.dart';
+import 'package:food_app/view/preview_widget.dart';
 
 class SearchPage extends StatefulWidget {
-  SearchPage({
-    Key? key,
-  }) : super(key: key);
+  const SearchPage({Key? key, this.recipe}) : super(key: key);
+  final RandomRecipe? recipe;
 
   @override
   SearchPageState createState() => SearchPageState();
 }
 
 class SearchPageState extends State<SearchPage> {
-  late List<RandomRecipe?> recipes;
+  List<RandomRecipe>? recipes;
   var isLoading = false;
 
   TextEditingController recipeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          actions: [
-            IconButton(
-                onPressed: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-
-                  try {
-                    var finalResult =
-                        await getRecipeSearchResult(recipeController.text);
-                    setState(() {
-                      recipes = finalResult;
-                    });
-                  } catch (err) {
-                    debugPrint(err.toString());
-                  } finally {
-                    setState(() {
-                      isLoading = false;
-                    });
-                  }
-                },
-                icon: const Icon(Icons.arrow_right_alt))
-          ],
-          title: TextField(
-            keyboardType: TextInputType.text,
-            controller: recipeController,
-            decoration: const InputDecoration(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                hintText: 'Search'),
-          )),
-      body: getBody(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          keyboardType: TextInputType.text,
+          controller: recipeController,
+          decoration: const InputDecoration(
+              icon: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(Icons.search, color: Colors.green),
+              ),
+              hintText: 'Search',
+              fillColor: Colors.green),
+          onSubmitted: searchRecipe,
+        ),
+        getBody()
+      ],
     );
+  }
+
+  void searchRecipe(value) async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      //Api call
+      var recipe = SearchQuery();
+      recipe.name = value;
+
+      recipes = await getRecipeSearchResult(recipe);
+    } catch (err) {
+      debugPrint(err.toString());
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   Widget getBody() {
@@ -66,25 +65,23 @@ class SearchPageState extends State<SearchPage> {
         child: CircularProgressIndicator(),
       );
     }
-    if (recipes == null) {
-      return Container();
+    if (recipes == null || recipes!.isEmpty) {
+      return const Center(child: Text('Please search something else'));
     }
-    return getListView(recipes);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: getRecipeView(),
+    );
   }
 
-  Widget getListView(List<RandomRecipe?> data) {
-    if (data == null) {
-      return const Center(
-        child: Text('Error in getting data'),
-      );
-    }
-
-    var recipeWidget = SingleChildScrollView(
-      child: RecipeWidget(
-        recipe: data,
-      ),
-    );
-
-    return recipeWidget;
+  List<Widget> getRecipeView() {
+    return recipes!
+        .map((e) => SingleChildScrollView(
+              child: PreviewWidget(
+                recipe: e,
+              ),
+            ))
+        .toList();
   }
 }
