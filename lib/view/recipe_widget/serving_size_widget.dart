@@ -9,61 +9,61 @@ class ServingSizeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("ServingSize",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Grams:${servingSizeElement!.grams.toString()}',
-                style: const TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.normal,
-                ),
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("ServingSize",
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Quantity:${servingSizeElement!.qty.toString()}',
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.normal,
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Scale:${servingSizeElement!.scale.toString()}',
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.normal,
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                  'OriginalWeight:${servingSizeElement!.originalWeight.toString()}',
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.normal,
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                  'OriginalWeightUnits:${servingSizeElement!.originalWeightUnits.toString()}',
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.normal,
-                  )),
-            ),
-          ]),
-    );
+              servingSizeElement!.grams != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        servingSizeElement!.grams.toString() ?? '',
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.normal),
+                      ),
+                    )
+                  : Container(),
+              servingSizeElement!.originalWeight != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        servingSizeElement!.originalWeight.toString() ?? '',
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.normal),
+                      ),
+                    )
+                  : Container(),
+              servingSizeElement!.originalWeightUnits != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(servingSizeElement!.originalWeightUnits ?? '',
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.normal)),
+                    )
+                  : Container(),
+              servingSizeElement!.qty != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(servingSizeElement!.qty.toString() ?? '',
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.normal)),
+                    )
+                  : Container(),
+              servingSizeElement!.units != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(servingSizeElement!.units ?? '',
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.normal)),
+                    )
+                  : Container(),
+            ]));
   }
 }

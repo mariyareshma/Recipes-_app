@@ -56,13 +56,21 @@ class RecipeWidget extends StatelessWidget {
             child: Row(
               children: [
                 Column(children: [
-                  getRecipeFuction('cooKing Time', recipe!.cookTime.toString()),
                   getRecipeFuction(
-                      'Prepare Time', recipe!.prepareTime.toString()),
+                      'CooKing Time :', recipe!.cookTime.toString()),
                   getRecipeFuction(
-                      'Servings Time', recipe!.servings.toString()),
+                      'Prepare Time :', recipe!.prepareTime.toString()),
+                  getRecipeFuction(
+                      'Servings Time :', recipe!.servings.toString()),
                 ]),
               ],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Ingredient :',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
 
@@ -72,6 +80,7 @@ class RecipeWidget extends StatelessWidget {
 
   Widget getResult() {
     var widget = <Widget>[];
+    widget.addAll(getIngridients());
 
     widget.add(Padding(
         padding: const EdgeInsets.all(8.0),
@@ -80,7 +89,7 @@ class RecipeWidget extends StatelessWidget {
     widget.add(Padding(
         padding: const EdgeInsets.all(8.0),
         child: StepsWidget(steps: recipe!.steps)));
-    widget.addAll(getIngridients());
+
     widget.addAll(getServingSize());
     widget.addAll(getNutrients());
 
@@ -121,7 +130,7 @@ class RecipeWidget extends StatelessWidget {
 
   Widget getRecipeFuction(String name, String fuctions) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
