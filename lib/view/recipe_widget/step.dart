@@ -11,11 +11,8 @@ class StepsWidget extends StatelessWidget {
     }
     var result = ' ';
 
-    for (var tag in steps) {
-      result = '$result$tag, ';
-    }
-    if (steps.isNotEmpty) {
-      result = result.substring(0, result.length - 2);
+    for (var step in steps) {
+      result = '$result$step, ';
     }
 
     return Padding(

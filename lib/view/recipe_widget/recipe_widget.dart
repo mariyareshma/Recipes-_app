@@ -13,91 +13,61 @@ class RecipeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Card(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  recipe!.name!,
-                  style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green),
-                ),
-              ),
-              Center(
-                child: Image.network(
-                  recipe!.image!.toString(),
-                  width: 300,
-                  height: 300,
-                ),
-              ),
-              // ignore: prefer_const_constructors
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: const Text(
-                  'Description :',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  recipe!.description!,
-                  style: const TextStyle(
-                      fontSize: 17, fontWeight: FontWeight.normal),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Cooking Time: ',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
-                    ),
-                    Text(recipe!.cookTime.toString()),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Prepare Time: ',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
-                    ),
-                    Text(recipe!.cookTime.toString())
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Servings Time: ',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
-                    ),
-                    Text(recipe!.cookTime.toString())
-                  ],
-                ),
-              ),
+        child: Card(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              recipe!.name!,
+              style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green),
+            ),
+          ),
+          Center(
+            child: Image.network(
+              recipe!.image!.toString(),
+              width: 300,
+              height: 300,
+            ),
+          ),
+          // ignore: prefer_const_constructors
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const Text(
+              'Description :',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              recipe!.description!,
+              style:
+                  const TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Column(children: [
+                  getRecipeFuction('cooKing Time', recipe!.cookTime.toString()),
+                  getRecipeFuction(
+                      'Prepare Time', recipe!.prepareTime.toString()),
+                  getRecipeFuction(
+                      'Servings Time', recipe!.servings.toString()),
+                ]),
+              ],
+            ),
+          ),
 
-              getResult(),
-            ]),
-      ),
-    );
+          getResult(),
+        ])));
   }
 
   Widget getResult() {
@@ -147,5 +117,25 @@ class RecipeWidget extends StatelessWidget {
       }
     }
     return items;
+  }
+
+  Widget getRecipeFuction(String name, String fuctions) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            name,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            fuctions.toString(),
+            style: const TextStyle(fontSize: 20),
+          ),
+        ],
+      ),
+    );
   }
 }
