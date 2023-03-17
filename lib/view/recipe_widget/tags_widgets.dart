@@ -15,7 +15,7 @@ class TagsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
           child: Text('Tags :',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         ),

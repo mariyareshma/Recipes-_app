@@ -24,7 +24,7 @@ class ServingSizeWidget extends StatelessWidget {
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        servingSizeElement!.grams.toString() ?? '',
+                        servingSizeElement!.grams.toString(),
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.normal),
                       ),
@@ -34,7 +34,7 @@ class ServingSizeWidget extends StatelessWidget {
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        servingSizeElement!.originalWeight.toString() ?? '',
+                        servingSizeElement!.originalWeight.toString(),
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.normal),
                       ),
@@ -51,7 +51,7 @@ class ServingSizeWidget extends StatelessWidget {
               servingSizeElement!.qty != null
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(servingSizeElement!.qty.toString() ?? '',
+                      child: Text(servingSizeElement!.qty.toString(),
                           style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.normal)),
                     )

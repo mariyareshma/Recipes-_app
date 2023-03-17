@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:food_app/model/recipes.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../model/favorite_recipe.dart';
+
 var fileName = 'bookmarkRecipe.json';
 
 Future<String> getFullFilePath() async {
@@ -10,45 +12,52 @@ Future<String> getFullFilePath() async {
   return '$appDirectory/$fileName';
 }
 
-Future<bool> recipeBookmarked(RandomRecipe recipe) async {
-  var bookmark = await getFavorite();
+Future<bool> isRecipeBookmarked(RandomRecipe recipe) async {
+  var bookmark = await getFavorites();
   var recipeExist = bookmark.any((element) => recipe.id == element.id);
   return recipeExist;
 }
 
-Future<bool> recipeNotBookmarkExists() async {
+Future<bool> recipeBookmarkFileExists() async {
   var fullFilePath = await getFullFilePath();
   var recipeObj = File(fullFilePath);
   return recipeObj.existsSync();
 }
 
-Future<List<RandomRecipe>> getFavorite() async {
+Future<List<FavoriteRecipe>> getFavorites() async {
   var fullFilePath = await getFullFilePath();
   var fileObj = File(fullFilePath);
   if (fileObj.existsSync()) {
     var jsonString = fileObj.readAsStringSync();
-    var foodObj = jsonDecode(jsonString);
 
-    return foodObj.map((e) {
-      return RandomRecipes.fromJson(e);
-    }).toList();
+    //List<dynamic>
+    var favRecipeObjects = jsonDecode(jsonString) as List;
+
+    return favRecipeObjects.map((e) => FavoriteRecipe.fromJson(e)).toList();
   }
-  return <RandomRecipe>[];
+  return <FavoriteRecipe>[];
 }
 
 Future<bool> addRecipeBookmark(RandomRecipe recipe) async {
   var fullFilePath = await getFullFilePath();
   var fileObj = File(fullFilePath);
-  var bookmark = await getFavorite();
-  bookmark.add(recipe);
+  var bookmarks = await getFavorites();
 
-  var markString = jsonEncode(bookmark);
+  var favRecipe = FavoriteRecipe(
+      id: recipe.id,
+      description: recipe.description,
+      image: recipe.image,
+      title: recipe.name);
+
+  bookmarks.add(favRecipe);
+
+  var markString = jsonEncode(bookmarks);
   fileObj.writeAsStringSync(markString);
   return true;
 }
 
 Future<bool> removeBookmark(RandomRecipe recipe) async {
-  var bookmarks = await getFavorite();
+  var bookmarks = await getFavorites();
 
   bookmarks.removeWhere((element) => element.id == recipe.id);
 

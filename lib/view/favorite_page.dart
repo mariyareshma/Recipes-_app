@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/model/favorite_recipe.dart';
 import 'package:food_app/model/recipes.dart';
 import 'package:food_app/services/book_mark_service.dart';
-import 'package:food_app/view/recipe_widget/recipe_widget.dart';
+import 'package:food_app/view/preview_widget.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({Key? key, this.recipe}) : super(key: key);
@@ -26,21 +27,21 @@ class FavoritePageState extends State<FavoritePage> {
           return const Center(child: CircularProgressIndicator());
         }
       },
-      future: getFavorite(),
+      future: getFavorites(),
     );
   }
 
-  Widget getListView(List<RandomRecipe>? recipe) {
-    if (recipe == null || recipe.isEmpty) {
+  Widget getListView(List<FavoriteRecipe>? favRecipes) {
+    if (favRecipes == null || favRecipes.isEmpty) {
       return const Center(
         child: Text('There is no Favorite book marked recipes.'),
       );
     }
 
     var addRecipeWidget = <Widget>[];
-    for (var recipes in recipe) {
-      var recipeWidget = RecipeWidget(
-        recipe: recipes,
+    for (var recipe in favRecipes) {
+      var recipeWidget = PreviewWidget(
+        recipe: recipe,
       );
       addRecipeWidget.add(recipeWidget);
     }

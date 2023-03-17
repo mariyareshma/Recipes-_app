@@ -6,7 +6,7 @@ class FavoriteRecipe {
     required this.description,
   });
 
-  final int? id;
+  final String? id;
   final String? title;
   final String? image;
   final String? description;
