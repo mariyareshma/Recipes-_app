@@ -11,7 +11,7 @@ Future<List<RandomRecipe>> getRecipeSearchResult(
       options: Options(
         headers: {
           'X-RapidAPI-Key':
-              '0a3549b220msh24b0e7a78c5e8a4p11c08ajsn185dfb2e808e',
+              'ad9b6066b1mshd5756570e550bb8p160398jsndfd6aec09495',
           'X-RapidAPI-Host': 'low-carb-recipes.p.rapidapi.com'
         },
       ));

@@ -2,14 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:food_app/model/recipes.dart';
 import 'package:food_app/view/recipe_widget/nutrients.dart';
 import 'package:food_app/view/recipe_widget/serving_size_widget.dart';
-import 'package:food_app/view/recipe_widget/ingredients_list.dart';
+import 'package:food_app/view/recipe_widget/ingredients_widget.dart';
 import 'package:food_app/view/recipe_widget/step.dart';
 import 'package:food_app/view/recipe_widget/tags_widgets.dart';
+import '../../services/book_mark_service.dart';
 
-class RecipeWidget extends StatelessWidget {
-  const RecipeWidget({Key? key, this.recipe}) : super(key: key);
+class RecipeWidget extends StatefulWidget {
+  const RecipeWidget({
+    Key? key,
+    required this.recipe,
+  }) : super(key: key);
   final RandomRecipe? recipe;
 
+  @override
+  State<RecipeWidget> createState() => _RecipeWidgetState();
+}
+
+class _RecipeWidgetState extends State<RecipeWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -21,7 +30,7 @@ class RecipeWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              recipe!.name!,
+              widget.recipe!.name!,
               style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -30,15 +39,15 @@ class RecipeWidget extends StatelessWidget {
           ),
           Center(
             child: Image.network(
-              recipe!.image!.toString(),
+              widget.recipe!.image!.toString(),
               width: 300,
               height: 300,
             ),
           ),
-          // ignore: prefer_const_constructors
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: const Text(
+          getFavoriteRecipe(),
+          const Padding(
+            padding: EdgeInsets.only(left: 8.0),
+            child: Text(
               'Description :',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
@@ -46,26 +55,17 @@ class RecipeWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              recipe!.description!,
+              widget.recipe!.description!,
               style:
                   const TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Column(children: [
-                  getRecipeFuction(
-                      'CooKing Time :', recipe!.cookTime.toString()),
-                  getRecipeFuction(
-                      'Prepare Time :', recipe!.prepareTime.toString()),
-                  getRecipeFuction(
-                      'Servings Time :', recipe!.servings.toString()),
-                ]),
-              ],
-            ),
-          ),
+          getRecipeFuction(
+              'Cooking Time :', widget.recipe!.cookTime.toString()),
+          getRecipeFuction(
+              'Prepare Time :', widget.recipe!.prepareTime.toString()),
+          getRecipeFuction(
+              'Servings Time :', widget.recipe!.servings.toString()),
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
@@ -73,38 +73,37 @@ class RecipeWidget extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-
           getResult(),
         ])));
   }
 
   Widget getResult() {
-    var widget = <Widget>[];
-    widget.addAll(getIngridients());
+    var widgetObj = <Widget>[];
+    widgetObj.addAll(getIngridients());
 
-    widget.add(Padding(
+    widgetObj.add(Padding(
         padding: const EdgeInsets.all(8.0),
-        child: TagsWidget(tags: recipe!.tags)));
+        child: TagsWidget(tags: widget.recipe!.tags)));
 
-    widget.add(Padding(
+    widgetObj.add(Padding(
         padding: const EdgeInsets.all(8.0),
-        child: StepsWidget(steps: recipe!.steps)));
+        child: StepsWidget(steps: widget.recipe!.steps)));
 
-    widget.addAll(getServingSize());
-    widget.addAll(getNutrients());
+    widgetObj.addAll(getServingSize());
+    widgetObj.addAll(getNutrients());
 
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start, children: widget);
+        crossAxisAlignment: CrossAxisAlignment.start, children: widgetObj);
   }
 
   List<Widget> getServingSize() {
-    return recipe!.servingSizes
+    return widget.recipe!.servingSizes
         .map((e) => ServingSizeWidget(servingSizeElement: e))
         .toList();
   }
 
   List<Widget> getIngridients() {
-    return recipe!.ingredients
+    return widget.recipe!.ingredients
         .map((e) => IngredientWidget(
               ingredient: e,
             ))
@@ -114,7 +113,7 @@ class RecipeWidget extends StatelessWidget {
   List<Widget> getNutrients() {
     var items = <Widget>[];
     var count = 0;
-    for (var entry in recipe!.nutrients.entries) {
+    for (var entry in widget.recipe!.nutrients.entries) {
       var widget = NutrientsWidget(
         nutrient: entry.key,
         unit: entry.value.toString(),
@@ -130,7 +129,7 @@ class RecipeWidget extends StatelessWidget {
 
   Widget getRecipeFuction(String name, String fuctions) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 8, top: 8.0, bottom: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,5 +145,30 @@ class RecipeWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  FutureBuilder<bool?> getFavoriteRecipe() {
+    return FutureBuilder(
+        future: isRecipeBookmarked(widget.recipe!),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            var bookmark = snapshot.data ?? false;
+            return IconButton(
+                onPressed: (() async {
+                  if (bookmark) {
+                    await removeBookmark(widget.recipe!);
+                  } else {
+                    await addRecipeBookmark(widget.recipe!);
+                  }
+                  setState(() {});
+                }),
+                icon: Icon(
+                  bookmark ? Icons.favorite : Icons.favorite_border_outlined,
+                  color: bookmark ? Colors.red : Colors.green,
+                  size: 25,
+                ));
+          }
+          return const CircularProgressIndicator();
+        });
   }
 }

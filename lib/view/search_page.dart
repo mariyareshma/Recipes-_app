@@ -77,9 +77,9 @@ class SearchPageState extends State<SearchPage> {
 
   List<Widget> getRecipeView() {
     return recipes!
-        .map((e) => SingleChildScrollView(
+        .map((e) => const Card(
               child: PreviewWidget(
-                recipe: e,
+                recipe: null,
               ),
             ))
         .toList();

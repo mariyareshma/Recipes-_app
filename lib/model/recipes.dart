@@ -79,6 +79,24 @@ class Ingredient {
   final String? name;
   final IngredientServingSize? servingSize;
 
+  String getQuantity() {
+    var ingredientsAmount = '';
+    if (servingSize!.grams != null) {
+      var grams = servingSize!.grams!.toStringAsFixed(2);
+
+      if (servingSize!.qty != null && servingSize!.units != null) {
+        ingredientsAmount =
+            '$grams (${servingSize!.qty} ${servingSize!.units})';
+      }
+    } else {
+      if (servingSize!.qty != null && servingSize!.units != null) {
+        ingredientsAmount = '${servingSize!.qty} ${servingSize!.units}';
+      }
+    }
+
+    return ingredientsAmount;
+  }
+
   factory Ingredient.fromJson(Map<String, dynamic> json) {
     return Ingredient(
       name: json["name"],

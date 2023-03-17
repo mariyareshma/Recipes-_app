@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/model/recipes.dart';
-import 'package:food_app/view/recipe_widget/serving_size.dart';
 
 class IngredientWidget extends StatelessWidget {
   const IngredientWidget({Key? key, this.ingredient}) : super(key: key);
@@ -9,8 +8,8 @@ class IngredientWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -24,24 +23,21 @@ class IngredientWidget extends StatelessWidget {
                 ),
               ),
             ),
-            getResult()
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  maxLines: 2,
+                  ingredient!.getQuantity(),
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ),
           ]),
-    );
-  }
-
-  Widget getResult() {
-    var widgets = <Widget>[];
-
-    widgets.add(ServingSizemWidget(
-      servingSize: ingredient!.servingSize!,
-    ));
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: widgets,
-      ),
     );
   }
 }
