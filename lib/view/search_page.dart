@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/model/favorite_recipe.dart';
 import 'package:food_app/model/recipes.dart';
 import 'package:food_app/model/search_recipes.dart';
 import 'package:food_app/services/search_recipe.dart';
 import 'package:food_app/view/preview_widget.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key, this.recipe}) : super(key: key);
-  final RandomRecipe? recipe;
+  const SearchPage({Key? key}) : super(key: key);
 
   @override
   SearchPageState createState() => SearchPageState();
@@ -66,22 +66,36 @@ class SearchPageState extends State<SearchPage> {
       );
     }
     if (recipes == null || recipes!.isEmpty) {
-      return const Center(child: Text('Please search something else'));
+      return const Center(
+          child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text('Please search something else'),
+      ));
     }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: getRecipeView(),
-    );
+    return getSearchItem(recipes!);
   }
 
-  List<Widget> getRecipeView() {
-    return recipes!
-        .map((e) => const Card(
-              child: PreviewWidget(
-                recipe: null,
-              ),
-            ))
-        .toList();
+  Widget getSearchItem(List<RandomRecipe> recipes) {
+    var widgets = <Widget>[];
+    for (var recipe in recipes) {
+      var favoritObj = FavoriteRecipe(
+          id: recipe.id,
+          title: recipe.name,
+          image: recipe.image,
+          description: recipe.description);
+      var recipeWidget = PreviewWidget(recipe: favoritObj);
+      {
+        widgets.add(recipeWidget);
+      }
+    }
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: widgets,
+        ),
+      ),
+    );
   }
 }

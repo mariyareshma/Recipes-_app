@@ -14,7 +14,11 @@ class PreviewWidgetState extends State<PreviewWidget> {
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-      leading: Image.network(widget.recipe!.image!),
+      leading: Image.network(
+        widget.recipe!.image!,
+        width: 100,
+        height: 100,
+      ),
       title: Text(widget.recipe!.title!),
       subtitle: Text(widget.recipe!.description!),
     ));
